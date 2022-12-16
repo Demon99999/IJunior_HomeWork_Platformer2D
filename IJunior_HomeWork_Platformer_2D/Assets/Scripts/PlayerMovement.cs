@@ -15,8 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private float _jumpLimits = 0.05f;
-    private const string _walk = "Walk";
-    private const string _jump = "Jump";
+
+    private const string Walk = "Walk";
+    private const string Jump = "Jump";
 
     private void Start()
     {
@@ -28,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Move();
-        Jump();
+        JumpUp();
     }
 
     private void Move()
@@ -37,28 +38,28 @@ public class PlayerMovement : MonoBehaviour
         {
             _spriteRenderer.flipX = true;
             transform.Translate(_speed * Time.deltaTime * -1,0,0);
-            _animator.SetBool(_walk,true);
+            _animator.SetBool(Walk,true);
         }
 
         else if (Input.GetKey(KeyCode.D))
         {
             _spriteRenderer.flipX = false;
             transform.Translate(_speed * Time.deltaTime, 0, 0);
-            _animator.SetBool(_walk,true);
+            _animator.SetBool(Walk,true);
         }
 
         else
         {
-            _animator.SetBool(_walk,false);
+            _animator.SetBool(Walk,false);
         }
 
     }
 
-    private void Jump()
+    private void JumpUp()
     {
         if (Input.GetKey(KeyCode.Space) && Mathf.Abs(_rigidbody2D.velocity.y) < _jumpLimits)
         {
-            _animator.SetTrigger(_jump);
+            _animator.SetTrigger(Jump);
             _rigidbody2D.velocity=new Vector2(_rigidbody2D.velocity.x * Time.deltaTime,_jumpForse);
         }
     }

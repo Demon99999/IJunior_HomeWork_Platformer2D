@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetBool(Walk,false);
         }
-
     }
 
     private void JumpUp()
